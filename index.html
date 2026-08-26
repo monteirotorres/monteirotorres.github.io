@@ -93,6 +93,23 @@
 
         .theme-toggle:hover { transform: scale(1.1); }
 
+        .language-flag {
+            width: 38px;
+            height: 26px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 2px solid transparent;
+            box-shadow: 0 2px 8px var(--shadow);
+            object-fit: cover;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .language-flag:hover { transform: scale(1.1); }
+        .language-flag.active {
+            border-color: var(--accent-vivid);
+            box-shadow: 0 0 0 3px rgba(179, 184, 51, 0.35);
+        }
+
         /* ===== CONTAINER ===== */
         .container {
             max-width: 880px;
@@ -287,25 +304,6 @@
             font-size: 0.85em;
             line-height: 1.55;
             color: var(--text-light);
-            margin-bottom: 8px;
-        }
-
-        .repo-lang {
-            font-size: 0.72em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            color: var(--accent);
-        }
-
-        .repo-lang::before {
-            content: '';
-            display: inline-block;
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--accent-vivid);
-            margin-right: 6px;
-            vertical-align: middle;
         }
 
         .repo-card.featured {
@@ -341,6 +339,8 @@
         <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
             <i class="fas fa-moon" id="theme-icon"></i>
         </button>
+        <img src="https://flagcdn.com/w40/br.png" class="language-flag" id="flag-pt" onclick="setLanguage('pt')" alt="Português">
+        <img src="https://flagcdn.com/w40/us.png" class="language-flag" id="flag-en" onclick="setLanguage('en')" alt="English">
     </div>
 
     <div class="container">
@@ -350,10 +350,10 @@
             <img src="foto.jpg" alt="Pedro Henrique Monteiro Torres" class="profile-pic">
             <div class="header-info">
                 <h1>Pedro Henrique Monteiro Torres</h1>
-                <h2>Researcher &amp; Adjunct Professor &nbsp;·&nbsp; UFRJ</h2>
+                <h2 data-i18n="role"></h2>
                 <div class="header-links">
                     <a href="https://github.com/monteirotorres" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                    <a href="https://monteirotorres.github.io/cv/" target="_blank"><i class="fas fa-id-card"></i> CV</a>
+                    <a href="https://monteirotorres.github.io/cv/" target="_blank"><i class="fas fa-id-card"></i> <span data-i18n="link_cv"></span></a>
                     <a href="https://orcid.org/0000-0002-0945-1495" target="_blank"><i class="fab fa-orcid"></i> ORCID</a>
                     <a href="http://lmdm.biof.ufrj.br/en/" target="_blank"><i class="fas fa-flask"></i> LMDM</a>
                 </div>
@@ -363,50 +363,37 @@
         <!-- ===== CONTENT ===== -->
         <div class="content">
 
-            <h3 class="section-title">About</h3>
-            <p class="about-text">
-                I am a researcher and Adjunct Professor at the Carlos Chagas Filho Institute of
-                Biophysics (UFRJ), working at the intersection of computational structural biology,
-                molecular modeling, drug design and bioinformatics. This page collects the open-source
-                software and teaching materials I develop and maintain.
-            </p>
+            <h3 class="section-title" data-i18n="about_title"></h3>
+            <p class="about-text" data-i18n="about_text"></p>
             <div class="keywords-row">
-                <span class="keyword-tag">Structural biology</span>
-                <span class="keyword-tag">Drug design</span>
-                <span class="keyword-tag">Bioinformatics</span>
-                <span class="keyword-tag">Molecular modeling</span>
-                <span class="keyword-tag">Machine learning</span>
+                <span class="keyword-tag" data-i18n="kw_1"></span>
+                <span class="keyword-tag" data-i18n="kw_2"></span>
+                <span class="keyword-tag" data-i18n="kw_3"></span>
+                <span class="keyword-tag" data-i18n="kw_4"></span>
+                <span class="keyword-tag" data-i18n="kw_5"></span>
             </div>
 
             <!-- CV -->
-            <h3 class="section-title section-gap">Curriculum</h3>
+            <h3 class="section-title section-gap" data-i18n="curriculum_title"></h3>
             <div class="repo-grid">
                 <a class="repo-card featured" href="https://monteirotorres.github.io/cv/" target="_blank">
                     <div class="repo-icon"><i class="fas fa-id-card"></i></div>
                     <div class="repo-body">
                         <div class="repo-name">CV <i class="fas fa-arrow-right arrow"></i></div>
-                        <div class="repo-desc">
-                            Interactive, bilingual (Portuguese / English) curriculum vitae with light and
-                            dark themes — education, positions, publications, awards and contact.
-                        </div>
-                        <div class="repo-lang">HTML</div>
+                        <div class="repo-desc" data-i18n="cv_desc"></div>
                     </div>
                 </a>
             </div>
 
             <!-- SOFTWARE -->
-            <h3 class="section-title section-gap">Software</h3>
+            <h3 class="section-title section-gap" data-i18n="software_title"></h3>
             <div class="repo-grid">
 
                 <a class="repo-card" href="https://github.com/monteirotorres/ProtCHOIR" target="_blank">
                     <div class="repo-icon"><i class="fas fa-cubes"></i></div>
                     <div class="repo-body">
                         <div class="repo-name">ProtCHOIR <i class="fas fa-arrow-right arrow"></i></div>
-                        <div class="repo-desc">
-                            Protein Complexes and Homo-Oligomeric Interfaces Resolver — proteome-scale
-                            generation and analysis of homo-oligomeric protein structures.
-                        </div>
-                        <div class="repo-lang">Python</div>
+                        <div class="repo-desc" data-i18n="protchoir_desc"></div>
                     </div>
                 </a>
 
@@ -414,11 +401,7 @@
                     <div class="repo-icon"><i class="fas fa-project-diagram"></i></div>
                     <div class="repo-body">
                         <div class="repo-name">cvnet <i class="fas fa-arrow-right arrow"></i></div>
-                        <div class="repo-desc">
-                            Takes a list of researcher names and builds a network of their scientific
-                            interactions and collaborations.
-                        </div>
-                        <div class="repo-lang">Python</div>
+                        <div class="repo-desc" data-i18n="cvnet_desc"></div>
                     </div>
                 </a>
 
@@ -426,11 +409,7 @@
                     <div class="repo-icon"><i class="fas fa-file-lines"></i></div>
                     <div class="repo-body">
                         <div class="repo-name">XtractComments <i class="fas fa-arrow-right arrow"></i></div>
-                        <div class="repo-desc">
-                            Extracts comments and annotations from a PDF file and writes them out to a
-                            plain-text file.
-                        </div>
-                        <div class="repo-lang">Python</div>
+                        <div class="repo-desc" data-i18n="xtract_desc"></div>
                     </div>
                 </a>
 
@@ -438,11 +417,7 @@
                     <div class="repo-icon"><i class="fas fa-dna"></i></div>
                     <div class="repo-body">
                         <div class="repo-name">msa2pdb <i class="fas fa-arrow-right arrow"></i></div>
-                        <div class="repo-desc">
-                            Maps multiple sequence alignment positions and conservation onto the
-                            corresponding residues of a PDB structure.
-                        </div>
-                        <div class="repo-lang">Python</div>
+                        <div class="repo-desc" data-i18n="msa2pdb_desc"></div>
                     </div>
                 </a>
 
@@ -450,53 +425,37 @@
                     <div class="repo-icon"><i class="fas fa-calculator"></i></div>
                     <div class="repo-body">
                         <div class="repo-name">impyctfactor <i class="fas fa-arrow-right arrow"></i></div>
-                        <div class="repo-desc">
-                            Python tool for retrieving and working with journal impact factors and
-                            related bibliometric data.
-                        </div>
-                        <div class="repo-lang">Python</div>
+                        <div class="repo-desc" data-i18n="impyct_desc"></div>
                     </div>
                 </a>
 
             </div>
 
             <!-- MATERIAL DIDÁTICO -->
-            <h3 class="section-title section-gap">Teaching materials</h3>
+            <h3 class="section-title section-gap" data-i18n="teaching_title"></h3>
             <div class="repo-grid">
 
-                <a class="repo-card" href="https://github.com/monteirotorres/biostat" target="_blank">
+                <a class="repo-card" href="https://monteirotorres.github.io/biostat/" target="_blank">
                     <div class="repo-icon"><i class="fas fa-chart-simple"></i></div>
                     <div class="repo-body">
                         <div class="repo-name">biostat <i class="fas fa-arrow-right arrow"></i></div>
-                        <div class="repo-desc">
-                            Course materials for applied biostatistics — notes and examples for the
-                            biosciences.
-                        </div>
-                        <div class="repo-lang">HTML</div>
+                        <div class="repo-desc" data-i18n="biostat_desc"></div>
                     </div>
                 </a>
 
-                <a class="repo-card" href="https://github.com/monteirotorres/ml" target="_blank">
+                <a class="repo-card" href="https://monteirotorres.github.io/ml/" target="_blank">
                     <div class="repo-icon"><i class="fas fa-brain"></i></div>
                     <div class="repo-body">
                         <div class="repo-name">ml <i class="fas fa-arrow-right arrow"></i></div>
-                        <div class="repo-desc">
-                            Introductory machine-learning course (“Curso de aprendizagem de máquina
-                            básico”) with hands-on notebooks.
-                        </div>
-                        <div class="repo-lang">Jupyter Notebook</div>
+                        <div class="repo-desc" data-i18n="ml_desc"></div>
                     </div>
                 </a>
 
-                <a class="repo-card" href="https://github.com/monteirotorres/introprogbiomed" target="_blank">
+                <a class="repo-card" href="https://monteirotorres.github.io/introprogbiomed/" target="_blank">
                     <div class="repo-icon"><i class="fas fa-code"></i></div>
                     <div class="repo-body">
                         <div class="repo-name">introprogbiomed <i class="fas fa-arrow-right arrow"></i></div>
-                        <div class="repo-desc">
-                            Material for “Programação para Biociências” (BFB772) and “Computação
-                            Científica Aplicada a Biossistemas” (ESB705).
-                        </div>
-                        <div class="repo-lang">HTML</div>
+                        <div class="repo-desc" data-i18n="introprog_desc"></div>
                     </div>
                 </a>
 
@@ -513,6 +472,67 @@
     </div>
 
     <script>
+        const I18N = {
+            en: {
+                role: "Researcher & Adjunct Professor · UFRJ",
+                link_cv: "CV",
+                about_title: "About",
+                about_text: "I am a researcher and Adjunct Professor at the Carlos Chagas Filho Institute of Biophysics (UFRJ), working at the intersection of computational structural biology, molecular modeling, drug design and bioinformatics. This page collects the open-source software and teaching materials I develop and maintain.",
+                kw_1: "Structural biology",
+                kw_2: "Drug design",
+                kw_3: "Bioinformatics",
+                kw_4: "Molecular modeling",
+                kw_5: "Machine learning",
+                curriculum_title: "Curriculum",
+                cv_desc: "Interactive, bilingual (Portuguese / English) curriculum vitae with light and dark themes — education, positions, publications, awards and contact.",
+                software_title: "Software",
+                protchoir_desc: "Protein Complexes and Homo-Oligomeric Interfaces Resolver — proteome-scale generation and analysis of homo-oligomeric protein structures.",
+                cvnet_desc: "Takes a list of researcher names and builds a network of their scientific interactions and collaborations.",
+                xtract_desc: "Extracts comments and annotations from a PDF file and writes them out to a plain-text file.",
+                msa2pdb_desc: "Maps multiple sequence alignment positions and conservation onto the corresponding residues of a PDB structure.",
+                impyct_desc: "Python tool for retrieving and working with journal impact factors and related bibliometric data.",
+                teaching_title: "Teaching materials",
+                biostat_desc: "Course materials for applied biostatistics — notes and examples for the biosciences.",
+                ml_desc: "Introductory machine-learning course with hands-on notebooks.",
+                introprog_desc: "Material for “Programação para Biociências” (BFB772) and “Computação Científica Aplicada a Biossistemas” (ESB705)."
+            },
+            pt: {
+                role: "Pesquisador & Professor Adjunto · UFRJ",
+                link_cv: "Currículo",
+                about_title: "Sobre",
+                about_text: "Sou pesquisador e Professor Adjunto no Instituto de Biofísica Carlos Chagas Filho (UFRJ), atuando na interseção entre biologia estrutural computacional, modelagem molecular, desenho de fármacos e bioinformática. Esta página reúne os softwares de código aberto e os materiais didáticos que desenvolvo e mantenho.",
+                kw_1: "Biologia estrutural",
+                kw_2: "Desenho de fármacos",
+                kw_3: "Bioinformática",
+                kw_4: "Modelagem molecular",
+                kw_5: "Aprendizagem de máquina",
+                curriculum_title: "Currículo",
+                cv_desc: "Currículo interativo e bilíngue (português / inglês) com temas claro e escuro — formação, cargos, publicações, prêmios e contato.",
+                software_title: "Software",
+                protchoir_desc: "Protein Complexes and Homo-Oligomeric Interfaces Resolver — geração e análise, em escala de proteoma, de estruturas de proteínas homo-oligoméricas.",
+                cvnet_desc: "Recebe uma lista de nomes de pesquisadores e constrói uma rede de suas interações e colaborações científicas.",
+                xtract_desc: "Extrai comentários e anotações de um arquivo PDF e os salva em um arquivo de texto simples.",
+                msa2pdb_desc: "Mapeia posições e conservação de um alinhamento múltiplo de sequências sobre os resíduos correspondentes de uma estrutura PDB.",
+                impyct_desc: "Ferramenta em Python para obter e trabalhar com fatores de impacto de periódicos e dados bibliométricos relacionados.",
+                teaching_title: "Material didático",
+                biostat_desc: "Material didático de bioestatística aplicada — notas e exemplos para as biociências.",
+                ml_desc: "Curso de aprendizagem de máquina básico, com notebooks práticos.",
+                introprog_desc: "Material das disciplinas “Programação para Biociências” (BFB772) e “Computação Científica Aplicada a Biossistemas” (ESB705)."
+            }
+        };
+
+        function setLanguage(lang) {
+            const dict = I18N[lang] || I18N.en;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key] !== undefined) el.textContent = dict[key];
+            });
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+            ['pt', 'en'].forEach(l => document.getElementById('flag-' + l).classList.remove('active'));
+            document.getElementById('flag-' + lang).classList.add('active');
+            localStorage.setItem('cv-lang', lang);
+        }
+
         function toggleTheme() {
             const html = document.documentElement;
             const isDark = html.getAttribute('data-theme') === 'dark';
@@ -527,6 +547,8 @@
                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
             document.documentElement.setAttribute('data-theme', savedTheme);
             document.getElementById('theme-icon').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            const savedLang = localStorage.getItem('cv-lang') || 'en';
+            setLanguage(savedLang);
         });
     </script>
 </body>
