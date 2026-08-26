@@ -1,825 +1,533 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pedro H. M. Torres</title>
-
-  <style>
-    :root {
-      --bg: #f7f8fa;
-      --surface: #ffffff;
-      --text: #17191c;
-      --muted: #68707a;
-      --line: #e4e7eb;
-      --accent: #1f6feb;
-      --accent-soft: #eaf2ff;
-      --max-width: 1120px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family:
-        Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(calc(100% - 48px), var(--max-width));
-      margin: auto;
-    }
-
-    /* NAV */
-
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(247, 248, 250, 0.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(228, 231, 235, 0.8);
-    }
-
-    .nav-inner {
-      height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .brand {
-      font-weight: 700;
-      letter-spacing: -0.03em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    /* HERO */
-
-    .hero {
-      min-height: 650px;
-      display: flex;
-      align-items: center;
-      padding: 100px 0 120px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 24px;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 28px;
-      height: 1px;
-      background: var(--accent);
-    }
-
-    h1 {
-      font-size: clamp(48px, 7vw, 82px);
-      line-height: .98;
-      letter-spacing: -0.065em;
-      margin: 0 0 28px;
-      font-weight: 750;
-    }
-
-    .hero-description {
-      max-width: 650px;
-      color: var(--muted);
-      font-size: 20px;
-      line-height: 1.55;
-      margin-bottom: 34px;
-    }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      padding: 11px 18px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      border: 1px solid var(--line);
-      background: var(--surface);
-      transition: .2s ease;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-      border-color: #c7ccd3;
-    }
-
-    .button.primary {
-      background: var(--text);
-      color: white;
-      border-color: var(--text);
-    }
-
-    /* MOLECULAR GRAPHIC */
-
-    .graphic {
-      width: 100%;
-      aspect-ratio: 1;
-      max-width: 390px;
-      margin-left: auto;
-      position: relative;
-    }
-
-    .graphic svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
-    .node {
-      fill: var(--surface);
-      stroke: var(--accent);
-      stroke-width: 2;
-    }
-
-    .bond {
-      stroke: #b9c1cb;
-      stroke-width: 2;
-    }
-
-    /* SECTIONS */
-
-    section {
-      padding: 100px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .section-header {
-      display: grid;
-      grid-template-columns: .35fr 1fr;
-      gap: 60px;
-      margin-bottom: 55px;
-    }
-
-    .section-number {
-      color: var(--accent);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .12em;
-    }
-
-    h2 {
-      font-size: 42px;
-      line-height: 1.05;
-      letter-spacing: -.045em;
-      margin: 0 0 18px;
-    }
-
-    .section-intro {
-      max-width: 680px;
-      color: var(--muted);
-      font-size: 18px;
-    }
-
-    /* RESEARCH */
-
-    .research-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .research-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 30px;
-      min-height: 210px;
-      transition: .2s ease;
-    }
-
-    .research-card:hover {
-      transform: translateY(-4px);
-      border-color: #c9ced6;
-    }
-
-    .research-card .index {
-      font-size: 12px;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 40px;
-    }
-
-    .research-card h3 {
-      font-size: 21px;
-      letter-spacing: -.025em;
-      margin: 0 0 10px;
-    }
-
-    .research-card p {
-      color: var(--muted);
-      font-size: 14px;
-      margin: 0;
-    }
-
-    /* PROJECTS */
-
-    .project {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 50px;
-      padding: 30px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .project:last-child {
-      border-bottom: 1px solid var(--line);
-    }
-
-    .project-name {
-      font-size: 23px;
-      font-weight: 700;
-      letter-spacing: -.03em;
-    }
-
-    .project-type {
-      color: var(--accent);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-top: 4px;
-    }
-
-    .project-description {
-      max-width: 700px;
-      color: var(--muted);
-    }
-
-    /* PUBLICATIONS */
-
-    .publication {
-      display: grid;
-      grid-template-columns: 90px 1fr;
-      gap: 30px;
-      padding: 22px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .publication-year {
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .publication-title {
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    .publication-meta {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* CONTACT */
-
-    .contact {
-      background: var(--text);
-      color: white;
-      border: none;
-    }
-
-    .contact .section-number {
-      color: #8db8ff;
-    }
-
-    .contact h2 {
-      max-width: 700px;
-    }
-
-    .contact p {
-      color: #aeb5bf;
-      max-width: 620px;
-      font-size: 18px;
-    }
-
-    .contact-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
-    }
-
-    .contact-link {
-      border: 1px solid #3a4048;
-      border-radius: 8px;
-      padding: 10px 16px;
-      font-size: 14px;
-      transition: .2s ease;
-    }
-
-    .contact-link:hover {
-      background: #252a31;
-    }
-
-    footer {
-      background: var(--text);
-      color: #747c86;
-      padding: 25px 0 35px;
-      font-size: 12px;
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 800px) {
-      .container {
-        width: min(calc(100% - 32px), var(--max-width));
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding: 70px 0 80px;
-      }
-
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 50px;
-      }
-
-      .graphic {
-        max-width: 300px;
-        margin: auto;
-      }
-
-      .section-header {
-        grid-template-columns: 1fr;
-        gap: 15px;
-      }
-
-      .research-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .project {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .publication {
-        grid-template-columns: 1fr;
-        gap: 5px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedro H. M. Torres</title>
+    <meta name="description" content="Pedro Henrique Monteiro Torres — researcher and professor in computational structural biology, drug design and bioinformatics (UFRJ). Software and teaching materials.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* ===== LIGHT MODE ===== */
+        /* #b3b833 is decorative only (borders/dots). Text accents use #6c7010 (5:1 on white). */
+        :root {
+            --primary:       #26280a;
+            --accent:        #6c7010;
+            --accent-vivid:  #b3b833;
+            --accent-light:  #f0f1cc;
+            --text:          #1c1e08;
+            --text-light:    #565820;
+            --border:        #d2d468;
+            --bg:            #f4f4db;
+            --card:          #ffffff;
+            --header-from:   #1c1e06;
+            --header-to:     #484a14;
+            --shadow:        rgba(26, 28, 8, 0.13);
+            --toggle-bg:     #6c7010;
+            --toggle-color:  #ffffff;
+            --icon-bg:       #6c7010;
+            --icon-color:    #ffffff;
+        }
+
+        /* ===== DARK MODE ===== */
+        /* Background is near-black neutral. Only accents (#b3b833) carry the color. */
+        [data-theme="dark"] {
+            --primary:       #f0f0f0;
+            --accent:        #b3b833;
+            --accent-vivid:  #b3b833;
+            --accent-light:  #1e1e1e;
+            --text:          #e0e0e0;
+            --text-light:    #888888;
+            --border:        #2a2a2a;
+            --bg:            #0d0d0d;
+            --card:          #161616;
+            --header-from:   #0d0d0d;
+            --header-to:     #1c1c1c;
+            --shadow:        rgba(0, 0, 0, 0.65);
+            --toggle-bg:     #b3b833;
+            --toggle-color:  #0d0d0d;
+            --icon-bg:       #222222;
+            --icon-color:    #b3b833;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--bg);
+            padding: 30px 20px;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* ===== CONTROLS ===== */
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .theme-toggle {
+            width: 38px;
+            height: 26px;
+            background: var(--toggle-bg);
+            color: var(--toggle-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.82em;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+        }
+
+        .theme-toggle:hover { transform: scale(1.1); }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            background: var(--card);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px var(--shadow);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, var(--header-from) 0%, var(--header-to) 100%);
+            padding: 44px 44px 40px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 300px; height: 300px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .profile-pic {
+            width: 130px; height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255,255,255,0.82);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+            flex-shrink: 0;
+            position: relative; z-index: 1;
+        }
+
+        .header-info { position: relative; z-index: 1; }
+
+        .header-info h1 {
+            font-size: 1.9em;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .header-info h2 {
+            font-size: 1em;
+            font-weight: 400;
+            opacity: 0.75;
+            margin-bottom: 14px;
+        }
+
+        .header-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .header-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 13px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.22);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.8em;
+            font-weight: 500;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .header-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* ===== CONTENT ===== */
+        .content { padding: 38px 44px 44px; }
+
+        .section-title {
+            font-size: 0.7em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            color: var(--accent);
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-light);
+            transition: color 0.3s, border-color 0.3s;
+        }
+
+        .section-gap { margin-top: 42px; }
+
+        .about-text {
+            font-size: 0.975em;
+            line-height: 1.85;
+            margin-bottom: 22px;
+            color: var(--text);
+        }
+
+        .keywords-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .keyword-tag {
+            background: var(--accent-light);
+            color: var(--accent);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.8em;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        /* ===== REPO CARDS ===== */
+        .repo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .repo-card {
+            display: flex;
+            gap: 14px;
+            padding: 18px 20px;
+            background: var(--accent-light);
+            border-radius: 11px;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent-vivid);
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+
+        .repo-card:hover {
+            border-color: var(--accent-vivid);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px var(--shadow);
+        }
+
+        .repo-icon {
+            width: 42px; height: 42px;
+            background: var(--icon-bg);
+            color: var(--icon-color);
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05em;
+            flex-shrink: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .repo-body { min-width: 0; }
+
+        .repo-name {
+            font-size: 0.98em;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 3px;
+            transition: color 0.3s;
+        }
+
+        .repo-name .arrow {
+            color: var(--accent);
+            font-size: 0.8em;
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .repo-card:hover .arrow { opacity: 1; transform: translateX(0); }
+
+        .repo-desc {
+            font-size: 0.85em;
+            line-height: 1.55;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .repo-lang {
+            font-size: 0.72em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--accent);
+        }
+
+        .repo-lang::before {
+            content: '';
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--accent-vivid);
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+
+        .repo-card.featured {
+            grid-column: 1 / -1;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 26px 44px 34px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.82em;
+        }
+
+        .footer a { color: var(--accent); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+
+        /* Responsive */
+        @media (max-width: 620px) {
+            body { padding: 10px; }
+            .header { flex-direction: column; text-align: center; padding: 32px 24px 28px; }
+            .header-links { justify-content: center; }
+            .content { padding: 28px 22px; }
+            .repo-grid { grid-template-columns: 1fr; }
+            .footer { padding: 22px; }
+        }
+    </style>
 </head>
-
 <body>
 
-  <!-- NAVIGATION -->
-
-  <nav>
-    <div class="container nav-inner">
-      <a class="brand" href="#">P. H. M. Torres</a>
-
-      <div class="nav-links">
-        <a href="#research">Research</a>
-        <a href="#projects">Projects</a>
-        <a href="#publications">Publications</a>
-        <a href="#contact">Contact</a>
-      </div>
+    <div class="controls">
+        <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
     </div>
-  </nav>
 
-
-  <!-- HERO -->
-
-  <main>
-
-    <section class="hero" style="border: none;">
-      <div class="container hero-grid">
-
-        <div>
-          <div class="eyebrow">
-            Computational Biology
-          </div>
-
-          <h1>
-            Pedro H.<br>
-            M. Torres
-          </h1>
-
-          <p class="hero-description">
-            Professor and researcher working at the intersection of
-            computational structural biology, bioinformatics,
-            molecular modeling and drug discovery.
-          </p>
-
-          <div class="buttons">
-            <a class="button primary" href="#research">
-              Explore my research
-            </a>
-
-            <a class="button" href="https://orcid.org/0000-0002-0945-1495"
-               target="_blank">
-              ORCID ↗
-            </a>
-
-            <a class="button" href="https://monteirotorres.github.io/cv/"
-               target="_blank">
-              CV ↗
-            </a>
-          </div>
-        </div>
-
-
-        <!-- ABSTRACT MOLECULAR GRAPHIC -->
-
-        <div class="graphic">
-
-          <svg viewBox="0 0 400 400">
-
-            <!-- bonds -->
-
-            <g class="bond">
-              <line x1="200" y1="70" x2="300" y2="125"/>
-              <line x1="300" y1="125" x2="330" y2="230"/>
-              <line x1="330" y1="230" x2="250" y2="315"/>
-              <line x1="250" y1="315" x2="145" y2="325"/>
-              <line x1="145" y1="325" x2="70" y2="230"/>
-              <line x1="70" y1="230" x2="105" y2="125"/>
-              <line x1="105" y1="125" x2="200" y2="70"/>
-
-              <line x1="105" y1="125" x2="200" y2="190"/>
-              <line x1="200" y1="190" x2="300" y2="125"/>
-
-              <line x1="200" y1="190" x2="250" y2="315"/>
-              <line x1="200" y1="190" x2="145" y2="325"/>
-            </g>
-
-            <!-- nodes -->
-
-            <circle class="node" cx="200" cy="70" r="14"/>
-            <circle class="node" cx="300" cy="125" r="14"/>
-            <circle class="node" cx="330" cy="230" r="14"/>
-            <circle class="node" cx="250" cy="315" r="14"/>
-            <circle class="node" cx="145" cy="325" r="14"/>
-            <circle class="node" cx="70" cy="230" r="14"/>
-            <circle class="node" cx="105" cy="125" r="14"/>
-
-            <circle class="node" cx="200" cy="190" r="21"/>
-
-            <circle class="node" cx="165" cy="155" r="7"/>
-            <circle class="node" cx="235" cy="155" r="7"/>
-            <circle class="node" cx="165" cy="225" r="7"/>
-            <circle class="node" cx="235" cy="225" r="7"/>
-
-          </svg>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- RESEARCH -->
-
-    <section id="research">
-
-      <div class="container">
-
-        <div class="section-header">
-
-          <div class="section-number">01 / RESEARCH</div>
-
-          <div>
-            <h2>
-              Understanding biology through computation.
-            </h2>
-
-            <p class="section-intro">
-              My research combines structural biology, molecular simulation,
-              bioinformatics and artificial intelligence to investigate
-              biological systems and accelerate molecular discovery.
-            </p>
-          </div>
-
-        </div>
-
-
-        <div class="research-grid">
-
-          <article class="research-card">
-            <div class="index">01</div>
-            <h3>Structural Biology</h3>
-            <p>
-              Protein structure, molecular assemblies, oligomerization
-              and structural characterization at proteome scale.
-            </p>
-          </article>
-
-          <article class="research-card">
-            <div class="index">02</div>
-            <h3>Drug Discovery</h3>
-            <p>
-              Computer-aided drug design, molecular docking,
-              binding-site identification and virtual screening.
-            </p>
-          </article>
-
-          <article class="research-card">
-            <div class="index">03</div>
-            <h3>AI &amp; Bioinformatics</h3>
-            <p>
-              Machine learning, computational pipelines and
-              data-driven approaches to biological discovery.
-            </p>
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- PROJECTS -->
-
-    <section id="projects">
-
-      <div class="container">
-
-        <div class="section-header">
-
-          <div class="section-number">02 / PROJECTS</div>
-
-          <div>
-            <h2>
-              Software, pipelines and research platforms.
-            </h2>
-
-            <p class="section-intro">
-              Open computational tools designed to make structural
-              and molecular discovery more scalable and reproducible.
-            </p>
-          </div>
-
-        </div>
-
-
-        <div class="project">
-
-          <div>
-            <div class="project-name">AM2PM</div>
-            <div class="project-type">
-              Research Platform
-            </div>
-          </div>
-
-          <div class="project-description">
-            Anti-Microbial Perpetual Prospection Machine — an automated
-            framework integrating metabolic network analysis, target
-            identification, structural modeling, virtual screening and
-            machine-learning-based consensus scoring.
-          </div>
-
-        </div>
-
-
-        <div class="project">
-
-          <div>
-            <div class="project-name">ProtCHOIR</div>
-            <div class="project-type">
-              Structural Biology
-            </div>
-          </div>
-
-          <div class="project-description">
-            A computational tool for proteome-scale generation and
-            analysis of homo-oligomeric protein structures.
-          </div>
-
-        </div>
-
-
-        <div class="project">
-
-          <div>
-            <div class="project-name">OCDocker</div>
-            <div class="project-type">
-              Machine Learning
-            </div>
-          </div>
-
-          <div class="project-description">
-            A consensus docking framework combining multiple scoring
-            functions with machine learning to improve the prioritization
-            of protein–ligand complexes.
-          </div>
-
-        </div>
-
-
-        <div class="project">
-
-          <div>
-            <div class="project-name">TARDIS</div>
-            <div class="project-type">
-              Systems Biology
-            </div>
-          </div>
-
-          <div class="project-description">
-            Automated metabolic-network reconstruction and analysis
-            for microbial systems, supporting the identification of
-            potential therapeutic targets.
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- PUBLICATIONS -->
-
-    <section id="publications">
-
-      <div class="container">
-
-        <div class="section-header">
-
-          <div class="section-number">03 / PUBLICATIONS</div>
-
-          <div>
-            <h2>
-              Selected publications.
-            </h2>
-
-            <p class="section-intro">
-              Research spanning computational biology, molecular modeling,
-              structural bioinformatics and biomedical applications.
-            </p>
-          </div>
-
-        </div>
-
-
-        <div class="publication">
-
-          <div class="publication-year">2025</div>
-
-          <div>
-            <div class="publication-title">
-              RND/HAE-1 members in the Pseudomonadota phylum:
-              exploring multidrug resistance
-            </div>
-
-            <div class="publication-meta">
-              Computational and structural analysis of multidrug
-              resistance systems.
-            </div>
-          </div>
-
-        </div>
-
-
-        <div class="publication">
-
-          <div class="publication-year">2021</div>
-
-          <div>
-            <div class="publication-title">
-              ProtCHOIR: a tool for proteome-scale generation
-              of homo-oligomers
-            </div>
-
-            <div class="publication-meta">
-              Briefings in Bioinformatics · Torres, P. H. M.;
-              Rossi, A. D.; Blundell, T. L.
-            </div>
-          </div>
-
-        </div>
-
-
-        <div class="publication">
-
-          <div class="publication-year">2024</div>
-
-          <div>
-            <div class="publication-title">
-              Gene Expression and Prognostic Value of NADPH
-              Oxidase Enzymes in Breast Cancer
-            </div>
-
-            <div class="publication-meta">
-              Computational analysis of gene expression and
-              prognostic associations.
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CONTACT -->
-
-    <section id="contact" class="contact">
-
-      <div class="container">
-
-        <div class="section-number">04 / CONTACT</div>
-
-        <h2>
-          Let's build something computationally interesting.
-        </h2>
-
-        <p>
-          I am interested in collaborations involving computational
-          structural biology, bioinformatics, molecular modeling,
-          drug discovery and machine learning.
-        </p>
-
-        <div class="contact-links">
-
-          <a class="contact-link"
-             href="https://github.com/monteirotorres"
-             target="_blank">
-            GitHub ↗
-          </a>
-
-          <a class="contact-link"
-             href="https://orcid.org/0000-0002-0945-1495"
-             target="_blank">
-            ORCID ↗
-          </a>
-
-          <a class="contact-link"
-             href="https://monteirotorres.github.io/cv/"
-             target="_blank">
-            Curriculum Vitae ↗
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <footer>
     <div class="container">
-      © Pedro Henrique Monteiro Torres
-    </div>
-  </footer>
 
+        <!-- ===== HEADER ===== -->
+        <div class="header">
+            <img src="https://monteirotorres.github.io/cv/foto.jpg" alt="Pedro Henrique Monteiro Torres" class="profile-pic">
+            <div class="header-info">
+                <h1>Pedro Henrique Monteiro Torres</h1>
+                <h2>Researcher &amp; Adjunct Professor &nbsp;·&nbsp; UFRJ</h2>
+                <div class="header-links">
+                    <a href="https://github.com/monteirotorres" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://monteirotorres.github.io/cv/" target="_blank"><i class="fas fa-id-card"></i> CV</a>
+                    <a href="https://orcid.org/0000-0002-0945-1495" target="_blank"><i class="fab fa-orcid"></i> ORCID</a>
+                    <a href="http://lmdm.biof.ufrj.br/en/" target="_blank"><i class="fas fa-flask"></i> LMDM</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CONTENT ===== -->
+        <div class="content">
+
+            <h3 class="section-title">About</h3>
+            <p class="about-text">
+                I am a researcher and Adjunct Professor at the Carlos Chagas Filho Institute of
+                Biophysics (UFRJ), working at the intersection of computational structural biology,
+                molecular modeling, drug design and bioinformatics. This page collects the open-source
+                software and teaching materials I develop and maintain.
+            </p>
+            <div class="keywords-row">
+                <span class="keyword-tag">Structural biology</span>
+                <span class="keyword-tag">Drug design</span>
+                <span class="keyword-tag">Bioinformatics</span>
+                <span class="keyword-tag">Molecular modeling</span>
+                <span class="keyword-tag">Machine learning</span>
+            </div>
+
+            <!-- CV -->
+            <h3 class="section-title section-gap">Curriculum</h3>
+            <div class="repo-grid">
+                <a class="repo-card featured" href="https://monteirotorres.github.io/cv/" target="_blank">
+                    <div class="repo-icon"><i class="fas fa-id-card"></i></div>
+                    <div class="repo-body">
+                        <div class="repo-name">CV <i class="fas fa-arrow-right arrow"></i></div>
+                        <div class="repo-desc">
+                            Interactive, bilingual (Portuguese / English) curriculum vitae with light and
+                            dark themes — education, positions, publications, awards and contact.
+                        </div>
+                        <div class="repo-lang">HTML</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- SOFTWARE -->
+            <h3 class="section-title section-gap">Software</h3>
+            <div class="repo-grid">
+
+                <a class="repo-card" href="https://github.com/monteirotorres/ProtCHOIR" target="_blank">
+                    <div class="repo-icon"><i class="fas fa-cubes"></i></div>
+                    <div class="repo-body">
+                        <div class="repo-name">ProtCHOIR <i class="fas fa-arrow-right arrow"></i></div>
+                        <div class="repo-desc">
+                            Protein Complexes and Homo-Oligomeric Interfaces Resolver — proteome-scale
+                            generation and analysis of homo-oligomeric protein structures.
+                        </div>
+                        <div class="repo-lang">Python</div>
+                    </div>
+                </a>
+
+                <a class="repo-card" href="https://github.com/monteirotorres/cvnet" target="_blank">
+                    <div class="repo-icon"><i class="fas fa-project-diagram"></i></div>
+                    <div class="repo-body">
+                        <div class="repo-name">cvnet <i class="fas fa-arrow-right arrow"></i></div>
+                        <div class="repo-desc">
+                            Takes a list of researcher names and builds a network of their scientific
+                            interactions and collaborations.
+                        </div>
+                        <div class="repo-lang">Python</div>
+                    </div>
+                </a>
+
+                <a class="repo-card" href="https://github.com/monteirotorres/XtractComments" target="_blank">
+                    <div class="repo-icon"><i class="fas fa-file-lines"></i></div>
+                    <div class="repo-body">
+                        <div class="repo-name">XtractComments <i class="fas fa-arrow-right arrow"></i></div>
+                        <div class="repo-desc">
+                            Extracts comments and annotations from a PDF file and writes them out to a
+                            plain-text file.
+                        </div>
+                        <div class="repo-lang">Python</div>
+                    </div>
+                </a>
+
+                <a class="repo-card" href="https://github.com/monteirotorres/msa2pdb" target="_blank">
+                    <div class="repo-icon"><i class="fas fa-dna"></i></div>
+                    <div class="repo-body">
+                        <div class="repo-name">msa2pdb <i class="fas fa-arrow-right arrow"></i></div>
+                        <div class="repo-desc">
+                            Maps multiple sequence alignment positions and conservation onto the
+                            corresponding residues of a PDB structure.
+                        </div>
+                        <div class="repo-lang">Python</div>
+                    </div>
+                </a>
+
+                <a class="repo-card" href="https://github.com/monteirotorres/pyfactor" target="_blank">
+                    <div class="repo-icon"><i class="fas fa-calculator"></i></div>
+                    <div class="repo-body">
+                        <div class="repo-name">pyfactor <i class="fas fa-arrow-right arrow"></i></div>
+                        <div class="repo-desc">
+                            Python utility from the group's computational toolbox — see the repository
+                            for details and usage.
+                        </div>
+                        <div class="repo-lang">Python</div>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- MATERIAL DIDÁTICO -->
+            <h3 class="section-title section-gap">Teaching materials</h3>
+            <div class="repo-grid">
+
+                <a class="repo-card" href="https://github.com/monteirotorres/biostat" target="_blank">
+                    <div class="repo-icon"><i class="fas fa-chart-simple"></i></div>
+                    <div class="repo-body">
+                        <div class="repo-name">biostat <i class="fas fa-arrow-right arrow"></i></div>
+                        <div class="repo-desc">
+                            Course materials for applied biostatistics — notes and examples for the
+                            biosciences.
+                        </div>
+                        <div class="repo-lang">HTML</div>
+                    </div>
+                </a>
+
+                <a class="repo-card" href="https://github.com/monteirotorres/ml" target="_blank">
+                    <div class="repo-icon"><i class="fas fa-brain"></i></div>
+                    <div class="repo-body">
+                        <div class="repo-name">ml <i class="fas fa-arrow-right arrow"></i></div>
+                        <div class="repo-desc">
+                            Introductory machine-learning course (“Curso de aprendizagem de máquina
+                            básico”) with hands-on notebooks.
+                        </div>
+                        <div class="repo-lang">Jupyter Notebook</div>
+                    </div>
+                </a>
+
+                <a class="repo-card" href="https://github.com/monteirotorres/introprogbiomed" target="_blank">
+                    <div class="repo-icon"><i class="fas fa-code"></i></div>
+                    <div class="repo-body">
+                        <div class="repo-name">introprogbiomed <i class="fas fa-arrow-right arrow"></i></div>
+                        <div class="repo-desc">
+                            Material for “Programação para Biociências” (BFB772) and “Computação
+                            Científica Aplicada a Biossistemas” (ESB705).
+                        </div>
+                        <div class="repo-lang">HTML</div>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="footer">
+            © Pedro Henrique Monteiro Torres ·
+            <a href="https://github.com/monteirotorres" target="_blank">github.com/monteirotorres</a>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            const newTheme = isDark ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            document.getElementById('theme-icon').className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+            localStorage.setItem('cv-theme', newTheme);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('cv-theme') ||
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('theme-icon').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        });
+    </script>
 </body>
 </html>
