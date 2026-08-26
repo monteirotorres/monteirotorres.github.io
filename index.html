@@ -1,0 +1,827 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedro H. M. Torres</title>
+
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --text: #17191c;
+      --muted: #68707a;
+      --line: #e4e7eb;
+      --accent: #1f6feb;
+      --accent-soft: #eaf2ff;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(calc(100% - 48px), var(--max-width));
+      margin: auto;
+    }
+
+    /* NAV */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(247, 248, 250, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(228, 231, 235, 0.8);
+    }
+
+    .nav-inner {
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      padding: 100px 0 120px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(48px, 7vw, 82px);
+      line-height: .98;
+      letter-spacing: -0.065em;
+      margin: 0 0 28px;
+      font-weight: 750;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.55;
+      margin-bottom: 34px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      padding: 11px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      transition: .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: #c7ccd3;
+    }
+
+    .button.primary {
+      background: var(--text);
+      color: white;
+      border-color: var(--text);
+    }
+
+    /* MOLECULAR GRAPHIC */
+
+    .graphic {
+      width: 100%;
+      aspect-ratio: 1;
+      max-width: 390px;
+      margin-left: auto;
+      position: relative;
+    }
+
+    .graphic svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .node {
+      fill: var(--surface);
+      stroke: var(--accent);
+      stroke-width: 2;
+    }
+
+    .bond {
+      stroke: #b9c1cb;
+      stroke-width: 2;
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 100px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: .35fr 1fr;
+      gap: 60px;
+      margin-bottom: 55px;
+    }
+
+    .section-number {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+
+    h2 {
+      font-size: 42px;
+      line-height: 1.05;
+      letter-spacing: -.045em;
+      margin: 0 0 18px;
+    }
+
+    .section-intro {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    /* RESEARCH */
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .research-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 30px;
+      min-height: 210px;
+      transition: .2s ease;
+    }
+
+    .research-card:hover {
+      transform: translateY(-4px);
+      border-color: #c9ced6;
+    }
+
+    .research-card .index {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+
+    .research-card h3 {
+      font-size: 21px;
+      letter-spacing: -.025em;
+      margin: 0 0 10px;
+    }
+
+    .research-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* PROJECTS */
+
+    .project {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 50px;
+      padding: 30px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .project:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .project-name {
+      font-size: 23px;
+      font-weight: 700;
+      letter-spacing: -.03em;
+    }
+
+    .project-type {
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-top: 4px;
+    }
+
+    .project-description {
+      max-width: 700px;
+      color: var(--muted);
+    }
+
+    /* PUBLICATIONS */
+
+    .publication {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 30px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .publication-year {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .publication-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .publication-meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* CONTACT */
+
+    .contact {
+      background: var(--text);
+      color: white;
+      border: none;
+    }
+
+    .contact .section-number {
+      color: #8db8ff;
+    }
+
+    .contact h2 {
+      max-width: 700px;
+    }
+
+    .contact p {
+      color: #aeb5bf;
+      max-width: 620px;
+      font-size: 18px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .contact-link {
+      border: 1px solid #3a4048;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 14px;
+      transition: .2s ease;
+    }
+
+    .contact-link:hover {
+      background: #252a31;
+    }
+
+    footer {
+      background: var(--text);
+      color: #747c86;
+      padding: 25px 0 35px;
+      font-size: 12px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 800px) {
+      .container {
+        width: min(calc(100% - 32px), var(--max-width));
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 70px 0 80px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .graphic {
+        max-width: 300px;
+        margin: auto;
+      }
+
+      .section-header {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .publication {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="#">P. H. M. Torres</a>
+
+      <div class="nav-links">
+        <a href="#research">Research</a>
+        <a href="#projects">Projects</a>
+        <a href="#publications">Publications</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+
+  <main>
+
+    <section class="hero" style="border: none;">
+      <div class="container hero-grid">
+
+        <div>
+          <div class="eyebrow">
+            Computational Biology
+          </div>
+
+          <h1>
+            Pedro H.<br>
+            M. Torres
+          </h1>
+
+          <p class="hero-description">
+            Professor and researcher working at the intersection of
+            computational structural biology, bioinformatics,
+            molecular modeling and drug discovery.
+          </p>
+
+          <div class="buttons">
+            <a class="button primary" href="#research">
+              Explore my research
+            </a>
+
+            <a class="button" href="https://orcid.org/0000-0002-0945-1495"
+               target="_blank">
+              ORCID ↗
+            </a>
+
+            <a class="button" href="https://monteirotorres.github.io/cv/"
+               target="_blank">
+              CV ↗
+            </a>
+          </div>
+        </div>
+
+
+        <!-- ABSTRACT MOLECULAR GRAPHIC -->
+
+        <div class="graphic">
+
+          <svg viewBox="0 0 400 400">
+
+            <!-- bonds -->
+
+            <g class="bond">
+              <line x1="200" y1="70" x2="300" y2="125"/>
+              <line x1="300" y1="125" x2="330" y2="230"/>
+              <line x1="330" y1="230" x2="250" y2="315"/>
+              <line x1="250" y1="315" x2="145" y2="325"/>
+              <line x1="145" y1="325" x2="70" y2="230"/>
+              <line x1="70" y1="230" x2="105" y2="125"/>
+              <line x1="105" y1="125" x2="200" y2="70"/>
+
+              <line x1="105" y1="125" x2="200" y2="190"/>
+              <line x1="200" y1="190" x2="300" y2="125"/>
+
+              <line x1="200" y1="190" x2="250" y2="315"/>
+              <line x1="200" y1="190" x2="145" y2="325"/>
+            </g>
+
+            <!-- nodes -->
+
+            <circle class="node" cx="200" cy="70" r="14"/>
+            <circle class="node" cx="300" cy="125" r="14"/>
+            <circle class="node" cx="330" cy="230" r="14"/>
+            <circle class="node" cx="250" cy="315" r="14"/>
+            <circle class="node" cx="145" cy="325" r="14"/>
+            <circle class="node" cx="70" cy="230" r="14"/>
+            <circle class="node" cx="105" cy="125" r="14"/>
+
+            <circle class="node" cx="200" cy="190" r="21"/>
+
+            <circle class="node" cx="165" cy="155" r="7"/>
+            <circle class="node" cx="235" cy="155" r="7"/>
+            <circle class="node" cx="165" cy="225" r="7"/>
+            <circle class="node" cx="235" cy="225" r="7"/>
+
+          </svg>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- RESEARCH -->
+
+    <section id="research">
+
+      <div class="container">
+
+        <div class="section-header">
+
+          <div class="section-number">01 / RESEARCH</div>
+
+          <div>
+            <h2>
+              Understanding biology through computation.
+            </h2>
+
+            <p class="section-intro">
+              My research combines structural biology, molecular simulation,
+              bioinformatics and artificial intelligence to investigate
+              biological systems and accelerate molecular discovery.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="research-grid">
+
+          <article class="research-card">
+            <div class="index">01</div>
+            <h3>Structural Biology</h3>
+            <p>
+              Protein structure, molecular assemblies, oligomerization
+              and structural characterization at proteome scale.
+            </p>
+          </article>
+
+          <article class="research-card">
+            <div class="index">02</div>
+            <h3>Drug Discovery</h3>
+            <p>
+              Computer-aided drug design, molecular docking,
+              binding-site identification and virtual screening.
+            </p>
+          </article>
+
+          <article class="research-card">
+            <div class="index">03</div>
+            <h3>AI &amp; Bioinformatics</h3>
+            <p>
+              Machine learning, computational pipelines and
+              data-driven approaches to biological discovery.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section id="projects">
+
+      <div class="container">
+
+        <div class="section-header">
+
+          <div class="section-number">02 / PROJECTS</div>
+
+          <div>
+            <h2>
+              Software, pipelines and research platforms.
+            </h2>
+
+            <p class="section-intro">
+              Open computational tools designed to make structural
+              and molecular discovery more scalable and reproducible.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="project">
+
+          <div>
+            <div class="project-name">AM2PM</div>
+            <div class="project-type">
+              Research Platform
+            </div>
+          </div>
+
+          <div class="project-description">
+            Anti-Microbial Perpetual Prospection Machine — an automated
+            framework integrating metabolic network analysis, target
+            identification, structural modeling, virtual screening and
+            machine-learning-based consensus scoring.
+          </div>
+
+        </div>
+
+
+        <div class="project">
+
+          <div>
+            <div class="project-name">ProtCHOIR</div>
+            <div class="project-type">
+              Structural Biology
+            </div>
+          </div>
+
+          <div class="project-description">
+            A computational tool for proteome-scale generation and
+            analysis of homo-oligomeric protein structures.
+          </div>
+
+        </div>
+
+
+        <div class="project">
+
+          <div>
+            <div class="project-name">OCDocker</div>
+            <div class="project-type">
+              Machine Learning
+            </div>
+          </div>
+
+          <div class="project-description">
+            A consensus docking framework combining multiple scoring
+            functions with machine learning to improve the prioritization
+            of protein–ligand complexes.
+          </div>
+
+        </div>
+
+
+        <div class="project">
+
+          <div>
+            <div class="project-name">TARDIS</div>
+            <div class="project-type">
+              Systems Biology
+            </div>
+          </div>
+
+          <div class="project-description">
+            Automated metabolic-network reconstruction and analysis
+            for microbial systems, supporting the identification of
+            potential therapeutic targets.
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PUBLICATIONS -->
+
+    <section id="publications">
+
+      <div class="container">
+
+        <div class="section-header">
+
+          <div class="section-number">03 / PUBLICATIONS</div>
+
+          <div>
+            <h2>
+              Selected publications.
+            </h2>
+
+            <p class="section-intro">
+              Research spanning computational biology, molecular modeling,
+              structural bioinformatics and biomedical applications.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="publication">
+
+          <div class="publication-year">2025</div>
+
+          <div>
+            <div class="publication-title">
+              RND/HAE-1 members in the Pseudomonadota phylum:
+              exploring multidrug resistance
+            </div>
+
+            <div class="publication-meta">
+              Computational and structural analysis of multidrug
+              resistance systems.
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="publication">
+
+          <div class="publication-year">2021</div>
+
+          <div>
+            <div class="publication-title">
+              ProtCHOIR: a tool for proteome-scale generation
+              of homo-oligomers
+            </div>
+
+            <div class="publication-meta">
+              Briefings in Bioinformatics · Torres, P. H. M.;
+              Rossi, A. D.; Blundell, T. L.
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="publication">
+
+          <div class="publication-year">2024</div>
+
+          <div>
+            <div class="publication-title">
+              Gene Expression and Prognostic Value of NADPH
+              Oxidase Enzymes in Breast Cancer
+            </div>
+
+            <div class="publication-meta">
+              Computational analysis of gene expression and
+              prognostic associations.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section id="contact" class="contact">
+
+      <div class="container">
+
+        <div class="section-number">04 / CONTACT</div>
+
+        <h2>
+          Let's build something computationally interesting.
+        </h2>
+
+        <p>
+          I am interested in collaborations involving computational
+          structural biology, bioinformatics, molecular modeling,
+          drug discovery and machine learning.
+        </p>
+
+        <div class="contact-links">
+
+          <a class="contact-link"
+             href="https://github.com/monteirotorres"
+             target="_blank">
+            GitHub ↗
+          </a>
+
+          <a class="contact-link"
+             href="https://orcid.org/0000-0002-0945-1495"
+             target="_blank">
+            ORCID ↗
+          </a>
+
+          <a class="contact-link"
+             href="https://monteirotorres.github.io/cv/"
+             target="_blank">
+            Curriculum Vitae ↗
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    <div class="container">
+      © Pedro Henrique Monteiro Torres
+    </div>
+  </footer>
+
+</body>
+</html>
+```
