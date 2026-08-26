@@ -167,8 +167,26 @@
         .header-info h2 {
             font-size: 1em;
             font-weight: 400;
-            opacity: 0.75;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+
+        .header-info .affil {
+            font-size: 0.85em;
+            opacity: 0.7;
             margin-bottom: 14px;
+        }
+
+        .header-info .affil a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.4);
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .header-info .affil a:hover {
+            color: var(--accent-vivid);
+            border-color: var(--accent-vivid);
         }
 
         .header-links {
@@ -213,30 +231,6 @@
         }
 
         .section-gap { margin-top: 42px; }
-
-        .about-text {
-            font-size: 0.975em;
-            line-height: 1.85;
-            margin-bottom: 22px;
-            color: var(--text);
-        }
-
-        .keywords-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .keyword-tag {
-            background: var(--accent-light);
-            color: var(--accent);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 4px 14px;
-            font-size: 0.8em;
-            font-weight: 500;
-            letter-spacing: 0.2px;
-        }
 
         /* ===== REPO CARDS ===== */
         .repo-grid {
@@ -349,8 +343,13 @@
         <div class="header">
             <img src="foto.jpg" alt="Pedro Henrique Monteiro Torres" class="profile-pic">
             <div class="header-info">
-                <h1>Pedro Henrique Monteiro Torres</h1>
-                <h2 data-i18n="role"></h2>
+                <h1>Pedro Torres</h1>
+                <h2>Computational Biophysicist</h2>
+                <div class="affil">
+                    <a href="https://lmdm.biof.ufrj.br" target="_blank">LMDM</a> -
+                    <a href="https://biof.ufrj.br" target="_blank">IBCCF</a> -
+                    <a href="https://ufrj.br" target="_blank">UFRJ</a>
+                </div>
                 <div class="header-links">
                     <a href="https://github.com/monteirotorres" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                     <a href="https://monteirotorres.github.io/cv/" target="_blank"><i class="fas fa-id-card"></i> <span data-i18n="link_cv"></span></a>
@@ -363,18 +362,8 @@
         <!-- ===== CONTENT ===== -->
         <div class="content">
 
-            <h3 class="section-title" data-i18n="about_title"></h3>
-            <p class="about-text" data-i18n="about_text"></p>
-            <div class="keywords-row">
-                <span class="keyword-tag" data-i18n="kw_1"></span>
-                <span class="keyword-tag" data-i18n="kw_2"></span>
-                <span class="keyword-tag" data-i18n="kw_3"></span>
-                <span class="keyword-tag" data-i18n="kw_4"></span>
-                <span class="keyword-tag" data-i18n="kw_5"></span>
-            </div>
-
             <!-- CV -->
-            <h3 class="section-title section-gap" data-i18n="curriculum_title"></h3>
+            <h3 class="section-title" data-i18n="curriculum_title"></h3>
             <div class="repo-grid">
                 <a class="repo-card featured" href="https://monteirotorres.github.io/cv/" target="_blank">
                     <div class="repo-icon"><i class="fas fa-id-card"></i></div>
@@ -474,15 +463,7 @@
     <script>
         const I18N = {
             en: {
-                role: "Researcher & Adjunct Professor · UFRJ",
                 link_cv: "CV",
-                about_title: "About",
-                about_text: "I am a researcher and Adjunct Professor at the Carlos Chagas Filho Institute of Biophysics (UFRJ), working at the intersection of computational structural biology, molecular modeling, drug design and bioinformatics. This page collects the open-source software and teaching materials I develop and maintain.",
-                kw_1: "Structural biology",
-                kw_2: "Drug design",
-                kw_3: "Bioinformatics",
-                kw_4: "Molecular modeling",
-                kw_5: "Machine learning",
                 curriculum_title: "Curriculum",
                 cv_desc: "Interactive, bilingual (Portuguese / English) curriculum vitae with light and dark themes — education, positions, publications, awards and contact.",
                 software_title: "Software",
@@ -500,15 +481,7 @@
                 introprog_desc: "Material for “Programação para Biociências” (BFB772) and “Computação Científica Aplicada a Biossistemas” (ESB705)."
             },
             pt: {
-                role: "Pesquisador & Professor Adjunto · UFRJ",
                 link_cv: "Currículo",
-                about_title: "Sobre",
-                about_text: "Sou pesquisador e Professor Adjunto no Instituto de Biofísica Carlos Chagas Filho (UFRJ), atuando na interseção entre biologia estrutural computacional, modelagem molecular, desenho de fármacos e bioinformática. Esta página reúne os softwares de código aberto e os materiais didáticos que desenvolvo e mantenho.",
-                kw_1: "Biologia estrutural",
-                kw_2: "Desenho de fármacos",
-                kw_3: "Bioinformática",
-                kw_4: "Modelagem molecular",
-                kw_5: "Aprendizagem de máquina",
                 curriculum_title: "Currículo",
                 cv_desc: "Currículo interativo e bilíngue (português / inglês) com temas claro e escuro — formação, cargos, publicações, prêmios e contato.",
                 software_title: "Software",
