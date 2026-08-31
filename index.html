@@ -94,21 +94,26 @@
 
         .theme-toggle:hover { transform: scale(1.1); }
 
-        .language-flag {
-            width: 38px;
+        .lang-btn {
             height: 26px;
+            padding: 0 10px;
             cursor: pointer;
             border-radius: 5px;
-            border: 2px solid transparent;
+            border: 1px solid var(--toggle-bg);
+            background: transparent;
+            color: var(--accent);
+            font-family: inherit;
+            font-size: 0.72em;
+            font-weight: 700;
+            letter-spacing: 0.5px;
             box-shadow: 0 2px 8px var(--shadow);
-            object-fit: cover;
-            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
         }
 
-        .language-flag:hover { transform: scale(1.1); }
-        .language-flag.active {
-            border-color: var(--accent-vivid);
-            box-shadow: 0 0 0 3px rgba(179, 184, 51, 0.35);
+        .lang-btn:hover { transform: scale(1.1); }
+        .lang-btn.active {
+            background: var(--toggle-bg);
+            color: var(--toggle-color);
         }
 
         /* ===== CONTAINER ===== */
@@ -334,8 +339,8 @@
         <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
             <i class="fas fa-moon" id="theme-icon"></i>
         </button>
-        <img src="https://flagcdn.com/w40/br.png" class="language-flag" id="flag-pt" onclick="setLanguage('pt')" alt="Português">
-        <img src="https://flagcdn.com/w40/us.png" class="language-flag" id="flag-en" onclick="setLanguage('en')" alt="English">
+        <button class="lang-btn" id="flag-pt" onclick="setLanguage('pt')" aria-label="Português">PT</button>
+        <button class="lang-btn" id="flag-en" onclick="setLanguage('en')" aria-label="English">EN</button>
     </div>
 
     <div class="container">
