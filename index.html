@@ -14,7 +14,6 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         /* ===== LIGHT MODE ===== */
-        /* #b3b833 is decorative only (borders/dots). Text accents use #6c7010 (5:1 on white). */
         :root {
             --primary:       #26280a;
             --accent:        #6c7010;
@@ -35,7 +34,27 @@
         }
 
         /* ===== DARK MODE ===== */
-        /* Background is near-black neutral. Only accents (#b3b833) carry the color. */
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --primary:       #f0f0f0;
+                --accent:        #b3b833;
+                --accent-vivid:  #b3b833;
+                --accent-light:  #1e1e1e;
+                --text:          #e0e0e0;
+                --text-light:    #888888;
+                --border:        #2a2a2a;
+                --bg:            #0d0d0d;
+                --card:          #161616;
+                --header-from:   #0d0d0d;
+                --header-to:     #1c1c1c;
+                --shadow:        rgba(0, 0, 0, 0.65);
+                --toggle-bg:     #b3b833;
+                --toggle-color:  #0d0d0d;
+                --icon-bg:       #222222;
+                --icon-color:    #b3b833;
+            }
+        }
+
         [data-theme="dark"] {
             --primary:       #f0f0f0;
             --accent:        #b3b833;
@@ -238,6 +257,14 @@
 
         .section-gap { margin-top: 42px; }
 
+        /* ===== ABOUT / RESEARCH ===== */
+        .about-text {
+            font-size: 0.975em;
+            line-height: 1.85;
+            color: var(--text);
+            max-width: 68ch;
+        }
+
         /* ===== REPO CARDS ===== */
         .repo-grid {
             display: grid;
@@ -352,8 +379,8 @@
                 <h1>Pedro Torres</h1>
                 <h2 data-i18n="title_sub"></h2>
                 <div class="affil">
-                    <a href="https://lmdm.biof.ufrj.br" target="_blank">LMDM</a> -
-                    <a href="https://biof.ufrj.br" target="_blank">IBCCF</a> -
+                    <a href="https://lmdm.biof.ufrj.br" target="_blank">LMDM</a> ·
+                    <a href="https://biof.ufrj.br" target="_blank">IBCCF</a> ·
                     <a href="https://ufrj.br" target="_blank">UFRJ</a>
                 </div>
                 <div class="header-links">
@@ -369,8 +396,12 @@
         <!-- ===== CONTENT ===== -->
         <div class="content">
 
+            <!-- RESEARCH -->
+            <h3 class="section-title" data-i18n="research_title"></h3>
+            <p class="about-text" data-i18n="research_text"></p>
+
             <!-- CV -->
-            <h3 class="section-title" data-i18n="curriculum_title"></h3>
+            <h3 class="section-title section-gap" data-i18n="curriculum_title"></h3>
             <div class="repo-grid">
                 <a class="repo-card featured" href="https://monteirotorres.github.io/cv/" target="_blank">
                     <div class="repo-icon"><i class="fas fa-id-card"></i></div>
@@ -472,6 +503,8 @@
             en: {
                 title_sub: "Computational Biophysicist",
                 link_cv: "CV",
+                research_title: "Research",
+                research_text: "Researcher and Associate Professor at the Carlos Chagas Filho Institute of Biophysics (UFRJ). My work combines molecular docking, dynamics simulations, machine learning and custom software to understand protein structure and discover therapeutic targets — with ongoing projects on neglected tropical diseases, multidrug resistance and proteome-scale structural analysis.",
                 curriculum_title: "Curriculum",
                 cv_desc: "Interactive, bilingual (Portuguese / English) curriculum vitae with light and dark themes — education, positions, publications, awards and contact.",
                 software_title: "Software",
@@ -491,6 +524,8 @@
             pt: {
                 title_sub: "Biofísico computacional",
                 link_cv: "Currículo",
+                research_title: "Pesquisa",
+                research_text: "Pesquisador e Professor Adjunto no Instituto de Biofísica Carlos Chagas Filho (UFRJ). Combino docking molecular, simulações de dinâmica, aprendizado de máquina e software próprio para entender a estrutura de proteínas e descobrir alvos terapêuticos — com projetos em andamento sobre doenças tropicais negligenciadas, resistência a múltiplos fármacos e análise estrutural em escala de proteoma.",
                 curriculum_title: "Currículo",
                 cv_desc: "Currículo interativo e bilíngue (português / inglês) com temas claro e escuro — formação, cargos, publicações, prêmios e contato.",
                 software_title: "Software",
